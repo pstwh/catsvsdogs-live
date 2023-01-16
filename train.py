@@ -44,7 +44,7 @@ if __name__ == "__main__":
     from torch.optim import AdamW
     import torchmetrics
 
-    from model import CatsVsDogsMobileNet
+    from model import CatsVsDogsMobileNet, CatsVsDogsSimpleNet, CatsVsDogsAlexNet
     from dataset import CatVsDogsDataset
 
     from random import shuffle
@@ -70,6 +70,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     model = CatsVsDogsMobileNet().to(args.device)
+    # model = CatsVsDogsSimpleNet().to(args.device)
+    # model = CatsVsDogsAlexNet().to(args.device)
+    print('Params', sum(p.numel() for p in model.parameters()))
+    print('Params Grad', sum(p.numel() for p in model.parameters() if p.requires_grad))
 
     optimizer = AdamW(model.parameters(), lr=args.learning_rate)
     metric = torchmetrics.Accuracy(task="multiclass", num_classes=2).to(args.device)
