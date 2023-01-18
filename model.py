@@ -42,7 +42,7 @@ class CatsVsDogsSimpleNet(nn.Module):
         x = F.max_pool2d(x, 2)  # (1, 64, 109, 109) -> (1, 64, 54, 54)
         x = self.conv3(x)  # (54 + 2 * 0 - 5) / 2 + 1
         x = F.relu(x)
-        x = F.max_pool2d(x, 8)  # (1, 128, 12, 12)
+        x = F.max_pool2d(x, 8)  # (1, 128, 3, 3)
         x = torch.flatten(x, 1)
         x = self.fc1(x)
 
